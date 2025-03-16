@@ -1,0 +1,33 @@
+POST http://localhost:3333/reminders
+Content-Type: application/json
+
+{
+    "title": "Agua",
+    "completed": false
+}
+
+###
+
+GET http://localhost:3333/reminders?search=agua
+
+###
+
+GET http://localhost:3333/reminders
+
+###
+
+PUT http://localhost:3333/reminders/fe60412b-c217-449b-845f-1e0d47731007/toggle
+
+###
+
+PUT http://localhost:3333/reminders/fe60412b-c217-449b-845f-1e0d47731007
+Content-Type: application/json
+
+{
+    "title": "Agua",
+    "completed": true
+}
+
+###
+
+DELETE http://localhost:3333/reminders/4609a524-e386-4df1-b840-f2b75fc1cf13
