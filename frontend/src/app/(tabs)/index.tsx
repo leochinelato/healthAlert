@@ -1,10 +1,10 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Constants from 'expo-constants';
 import { ReminderList } from "@/src/components/Reminder";
 import useReminders from "../../hooks/useReminders"
 
 const Index = () => {
-  const {reminders, loading } = useReminders()
+  const { reminders, loading } = useReminders()
 
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -13,8 +13,9 @@ const Index = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.mainText}>Olá, Fulano 👋</Text>
+
       {reminders.length > 0 ? (
-        <ReminderList reminders={reminders} />
+        <ReminderList />
       ) : (
         <Text>Nenhum lembrete encontrado.</Text>
       )}
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 64,
     paddingHorizontal: 32,
-    marginTop: Constants.statusBarHeight
+    marginTop: Constants.statusBarHeight,
+    gap: 10
   },
   mainText: {
     fontSize: 24

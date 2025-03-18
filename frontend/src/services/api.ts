@@ -13,7 +13,15 @@ export const fetchReminders = async () => {
     }
 }
 
-fetch("http://192.168.15.140:3333/reminders")
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error("Erro na requisição:", error));
+export async function toggleReminder(id: string) {
+    const response = await fetch(`${API_URL}/reminders/${id}/toggle`, {
+        method: "PATCH"
+    })
+
+    if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${response.statusText}`)
+    }
+
+    return response.json()
+
+}

@@ -24,9 +24,9 @@ server.post('/reminders', async (request, reply) => {
     return reply.status(201).send()
 })
 
-server.put('/reminders/:id/toggle', async (request, reply) => {
-    const reminderId = request.params.id
 
+server.patch('/reminders/:id/toggle', async (request, reply) => {
+    const reminderId = request.params.id
     const updatedReminder = await database.toggleReminder(reminderId)
     reply.send(updatedReminder)
 })
