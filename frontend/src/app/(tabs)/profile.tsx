@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import Constants from 'expo-constants';
 
-export default function Index() {
+const Profile = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.mainText}>Olá, Fulano 👋</Text>
+      <Text style={styles.mainText}>Profile</Text>
     </View>
   );
 }
@@ -12,8 +12,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
-    backgroundColor: "#FFF",
+    paddingTop: 64,
     paddingHorizontal: 32,
     marginTop: Constants.statusBarHeight
   },
@@ -21,3 +20,5 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 })
+
+export default Profile;

@@ -82,7 +82,10 @@ server.delete('/reminders/:id', async (request, reply) => {
 
 
 
-server.listen({
-    host: "0.0.0.0",
-    port: 3333,
+server.listen({ host: "0.0.0.0", port: 3333, }, (err, address) => {
+    if (err) {
+        console.error(err)
+        process.exit(1)
+    }
+    console.log(`Servidor rodando em ${address}`)
 })
