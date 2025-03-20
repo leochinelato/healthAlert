@@ -52,36 +52,6 @@ server.delete('/reminders/:id', async (request, reply) => {
     return reply.status(204).send()
 })
 
-
-// server.post('/users', (request, reply) => {
-//     const { username, password } = request.body
-
-//     database.create({
-//         username: username,
-//         password: password
-//     })
-
-//     return reply.status(201).send()
-// })
-
-// server.put('/users/:id', (request, reply) => {
-//     const userId = request.params.id
-//     const { username, password } = request.body
-
-//     database.update(userId, {
-//         username,
-//         password
-//     })
-
-//     return reply.status(204).send()
-// })
-
-// server.delete('/users/:id', () => {
-//     return 'Hello, world!'
-// })
-
-
-
 server.listen({ host: "0.0.0.0", port: 3333, }, (err, address) => {
     if (err) {
         console.error(err)

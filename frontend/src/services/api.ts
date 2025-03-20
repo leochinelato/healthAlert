@@ -1,4 +1,4 @@
-export const API_URL = "http://192.168.15.140:3333"
+export const API_URL = "http://192.168.15.152:3333"
 
 export const fetchReminders = async () => {
     try {
@@ -13,15 +13,43 @@ export const fetchReminders = async () => {
     }
 }
 
-export async function toggleReminder(id: string) {
-    const response = await fetch(`${API_URL}/reminders/${id}/toggle`, {
-        method: "PATCH"
-    })
+export const toggleReminder = async (id: string) => {
+    try {
+        const response = await fetch(`${API_URL}/reminders/${id}/toggle`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ completed: true })
+        })
 
-    if (!response.ok) {
-        throw new Error(`Erro ${response.status}: ${response.statusText}`)
+        if (!response.ok) {
+            throw new Error(`Erro ${response.status}: ${response.statusText}`)
+        }
+
+        return await response.json()
+
+    } catch (error) {
+        console.error("Erro ao atualizar reminder:", error)
+        throw error;
     }
+}
 
-    return response.json()
+export const createReminder = async (title: string) => {
+    try {
+        const response = await fetch(`${API_URL}/reminders`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: title })
+        })
+
+        return await response.json()
+
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
 
 }

@@ -18,9 +18,9 @@ export class DatabasePostgres {
     async create(reminder) {
         const reminderId = randomUUID()
 
-        const { title, completed } = reminder
+        const { title } = reminder
 
-        await sql`insert into reminders (id, title, completed) VALUES (${reminderId}, ${title}, ${completed})`
+        await sql`insert into reminders (id, title, completed) VALUES (${reminderId}, ${title}, false)`
     }
 
     async update(id, reminder) {
@@ -45,7 +45,7 @@ export class DatabasePostgres {
                 throw new Error("Lembrete não encontrado");
             }
 
-            return result[0]; // Retorna o lembrete atualizado
+            return result[0];
         } catch (error) {
             console.error("Erro ao alternar lembrete:", error);
             throw error;

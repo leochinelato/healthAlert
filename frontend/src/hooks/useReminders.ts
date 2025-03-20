@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Reminder } from "../types";
-import { API_URL, fetchReminders, toggleReminder } from "../services/api";
+import { API_URL, createReminder, fetchReminders, toggleReminder } from "../services/api";
 
 const useReminders = () => {
     const [reminders, setReminders] = useState<Reminder[]>([])
@@ -29,33 +29,38 @@ const useReminders = () => {
 
         setReminders((prev) =>
             prev.map((reminder) =>
-                reminder.id === id ? {...reminder, completed: !reminder.completed} : reminder
+                reminder.id === id ? { ...reminder, completed: !reminder.completed } : reminder
             )
         )
         try {
-            const response = await fetch(`${API_URL}/reminders/${id}/toggle`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ completed: true })
-            })
-
-            if (!response.ok) {
-                throw new Error("Erro ao atualizar reminder.")
-            }
-
-            return await response.json()
-
+            const updatedReminder = await toggleReminder(id)
+            setReminders((prev) =>
+                prev.map((reminder) =>
+                    reminder.id === id ? updatedReminder : reminder
+                )
+            );
         } catch (error) {
             console.error(error)
             throw error
         }
     };
 
+    const addReminder = async (title: string) => {
+        setLoading(true)
+        setError(null)
+
+        try {
+            const newReminder = await createReminder(title)
+            setReminders((prev) => [...prev, newReminder])
+        } catch (error) {
+            setError("Erro ao adicionar reminder.")
+        } finally {
+            setLoading(false)
+        }
+    }
 
 
-    return { reminders, loading, toggleReminderById }
+    return { reminders, loading, toggleReminderById, addReminder }
 }
 
 export default useReminders

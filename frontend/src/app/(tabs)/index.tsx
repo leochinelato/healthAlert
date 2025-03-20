@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Constants from 'expo-constants';
 import { ReminderList } from "@/src/components/Reminder";
 import useReminders from "../../hooks/useReminders"
